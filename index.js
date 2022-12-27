@@ -34,7 +34,7 @@ function getFinals(data) {
     })
     return allFinals
  }
-console.log('task 2', getFinals(fifaData))
+// console.log('task 2', getFinals(fifaData))
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -43,10 +43,11 @@ Use the higher-order function called getYears to do the following:
 2. Receive a callback function as the second parameter that will take getFinals from task 2 as an argument
 3. Return an array called years containing all of the years in the getFinals data set*/
 
-function getYears(data, getFinals) {
+function getYears(data) {
     return getFinals(data).map(item => item.Year)
     /* code here */
 }
+// getYears(fifaData, getFinals)
 console.log('task 3 ', getYears(fifaData, getFinals))
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -57,11 +58,13 @@ Use the higher-order function getWinners to do the following:
 💡 HINT: Don't worry about ties for now (Please see the README file for info on ties for a stretch goal.)
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
+function getWinners(data, getFinals ) {
+    return getFinals(data).map(item => item['Home Team Goals'] > item['Away Team Goals'] ?
+    item['Home Team Name'] : item['Away Team Name'])
     /* code here */
 }
 
-
+console.log('task 4', getWinners(fifaData, getFinals)) 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use the higher-order function getWinnersByYear to do the following:
@@ -74,10 +77,14 @@ Use the higher-order function getWinnersByYear to do the following:
 💡 HINT: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
+function getWinnersByYear(data, getYears, getWinners) {
+    const winners = getWinners(data, getFinals);
+    const years = getYears(data, getFinals );
+    return winners.map((item, index) => `In ${years[index]}, ${item} won the world cup!`)
     /* code here */
 }
-
+getWinnersByYear(fifaData, getYears, getWinners)
+// console.log( getWinnersByYear(fifaData, getYears, getWinners))
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
